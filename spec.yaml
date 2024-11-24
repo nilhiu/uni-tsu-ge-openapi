@@ -1,0 +1,2126 @@
+openapi: 3.0.0
+info:
+  title: Tbilisi State University's (TSU's) Student Portal
+  version: 1.0.0
+servers:
+- url: https://uni.tsu.ge/api
+  description: Tbilisi State University's (TSU's) Student Portal API.
+paths:
+  /Auth/Login:
+    post:
+      summary: Login route to get a token for anything else
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  username:
+                    type: string
+                  password:
+                    type: object
+                  currentPassword:
+                    type: object
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+                  token:
+                    type: string
+                  userType:
+                    type: object
+                  userId:
+                    type: object
+                  email:
+                    type: object
+                  student:
+                    type: object
+                    properties:
+                      studentId:
+                        type: number
+                      personId:
+                        type: number
+                      statusId:
+                        type: number
+                      fName:
+                        type: string
+                      sName:
+                        type: string
+                      primaryStudyProgramId:
+                        type: number
+                      primaryStudyProgramGroupId:
+                        type: number
+                      primarySpecializationId:
+                        type: object
+                      secondaryStudyProgramID:
+                        type: number
+                      studyProgramCredit:
+                        type: number
+                      studyLanguageId:
+                        type: number
+                      facultyId:
+                        type: number
+                      studyLevelId:
+                        type: number
+                      profileImageFileStream:
+                        type: string
+                      semesterNumber:
+                        type: number
+                      studentCardSelecteds:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            studId:
+                              type: number
+                            syllabusId:
+                              type: object
+                            courseId:
+                              type: object
+                            studentSemesterNumber:
+                              type: object
+                            credit:
+                              type: number
+                            sumMark:
+                              type: number
+                            enrollStatusId:
+                              type: number
+                            enrolledFromId:
+                              type: object
+                            subjectId:
+                              type: number
+                            sessionId:
+                              type: number
+                            studyYearId:
+                              type: number
+                            studySemesterId:
+                              type: number
+                            enableImprove:
+                              type: number
+                            createDate:
+                              type: object
+                      finStatusEnabled:
+                        type: number
+                      financeCredits:
+                        type: object
+                        properties:
+                          studyYearId:
+                            type: number
+                          studySemesterId:
+                            type: number
+                          credit:
+                            type: number
+                      enabledCredits:
+                        type: object
+                      programCoreSemester:
+                        type: number
+                      subjects:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            subjectId:
+                              type: number
+                            syllabusId:
+                              type: number
+                            credit:
+                              type: number
+                            score:
+                              type: number
+                            status:
+                              type: number
+                            studyYearId:
+                              type: number
+                            studySemesterId:
+                              type: number
+                            enableImprove:
+                              type: number
+                      subjectsImpr:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            subjectId:
+                              type: number
+                            syllabusId:
+                              type: number
+                            credit:
+                              type: number
+                            score:
+                              type: number
+                            status:
+                              type: number
+                            studyYearId:
+                              type: number
+                            studySemesterId:
+                              type: number
+                            enableImprove:
+                              type: number
+                      syllabi:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            subjectId:
+                              type: number
+                            syllabusId:
+                              type: number
+                            credit:
+                              type: number
+                            score:
+                              type: number
+                            status:
+                              type: number
+                            studyYearId:
+                              type: number
+                            studySemesterId:
+                              type: number
+                            enableImprove:
+                              type: number
+                      sumCredits:
+                        type: number
+                      sumCreditsImprove:
+                        type: number
+                      avgMark:
+                        type: number
+                      gpa:
+                        type: number
+                      moduleCredits:
+                        type: number
+                  lecturer:
+                    type: object
+                  adminUser:
+                    type: object
+                  userNameNotExists:
+                    type: number
+                  oneTimeCodeNotExists:
+                    type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Username:
+                  type: string
+                Password:
+                  type: string
+                LanguageId:
+                  type: number
+            example:
+              Username: plaintext personal ID
+              Password: plaintext password
+              LanguageId: 1
+  /Correspondence/UnReadCorrespondence:
+    post:
+      summary: Gets the amount of unread "correspondences" (notifications)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+  /Quiz/QuizList:
+    post:
+      summary: Gets a list of active surveys that can forces you to apply for a student's debit card, or not
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    quizId:
+                      type: integer
+                      example: 1056
+                    caption:
+                      type: string
+                      example: "name of the quiz"
+                    complete:
+                      type: boolean
+                      example: true
+                    subjectName:
+                      type: string
+                      nullable: true
+                      example: null
+                    enrollHistoryId:
+                      type: string
+                      nullable: true
+                      example: null
+                    groupId:
+                      type: string
+                      nullable: true
+                      example: null
+                    personId:
+                      type: string
+                      nullable: true
+                      example: null
+                    sName:
+                      type: string
+                      nullable: true
+                      example: null
+                    fName:
+                      type: string
+                      nullable: true
+                      example: null
+                    groupTypeName:
+                      type: string
+                      nullable: true
+                      example: null
+                    lectureNum:
+                      type: string
+                      nullable: true
+                      example: null
+                    lectureTypeId:
+                      type: string
+                      nullable: true
+                      example: null
+                    description:
+                      type: string
+                      example: "some long text"
+                    requered:
+                      type: boolean
+                      example: true
+  /Sheared/FileImage:
+    get:
+      summary: Used (as far as I can tell) to get profile pictures.
+      responses:
+        '200':
+          description: OK
+          content: {}
+      parameters:
+      - name: fileInfo
+        in: query
+        required: false
+        schema:
+          type: string
+  /InformationBoard/GetEduProcessInfo:
+    post:
+      summary: Gets the start/end dates and info about processes such as administrative registration
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    stratDate:
+                      type: string
+                    endDate:
+                      type: string
+                    active:
+                      type: number
+                    activeCaption:
+                      type: string
+                    facultyCaption:
+                      type: string
+                    facultyId:
+                      type: number
+                    studyLevelCaption:
+                      type: string
+                    studyLevelId:
+                      type: number
+                    yearId:
+                      type: number
+                    studyYearCaption:
+                      type: string
+                    studySemecterCaption:
+                      type: string
+                    semesterId:
+                      type: number
+                    eduProcessList:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          sessionId:
+                            type: number
+                          eduProcessTypeId:
+                            type: number
+                          eduProcessCaption:
+                            type: string
+                          startDateTime:
+                            type: string
+                          endDateTime:
+                            type: string
+                          isActive:
+                            type: number
+  /InformationBoard/GetMobEduProcessInfo:
+    post:
+      summary: Not sure for now
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+  /InformationBoard/GetInfoList:
+    post:
+      summary: Gets published instructional videos or texts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  informationBoardList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        headerId:
+                          type: number
+                        infoTypeId:
+                          type: number
+                        statusId:
+                          type: number
+                        headerText:
+                          type: string
+                        shortText:
+                          type: string
+                        linkUrl:
+                          type: string
+                        infoTypeCaption:
+                          type: string
+                        statusCaption:
+                          type: object
+                        publishDateTime:
+                          type: string
+                        informationBoardDataFiles:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              fileName:
+                                type: string
+                              fileStreamId:
+                                type: string
+                              id:
+                                type: number
+                              isAvatar:
+                                type: boolean
+                  count:
+                    type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /Card/StudentProfile:
+    post:
+      summary: Gets info about the user in a given language
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  studentProfile:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        courseId:
+                          type: object
+                        subjectId:
+                          type: number
+                        syllabusId:
+                          type: object
+                        studyYearId:
+                          type: number
+                        studySemesterId:
+                          type: number
+                        studentId:
+                          type: number
+                        semesterNumber:
+                          type: number
+                        lecturerList:
+                          type: object
+                        credit:
+                          type: number
+                        subjectName:
+                          type: string
+                        subjectNameEng:
+                          type: string
+                        subjectType:
+                          type: string
+                        subjectTypeId:
+                          type: number
+                        yearName:
+                          type: string
+                        semName:
+                          type: string
+                        yearSemName:
+                          type: string
+                        enrollStatus:
+                          type: string
+                        enrollStatusId:
+                          type: number
+                        subjectFrom:
+                          type: object
+                        sumMark:
+                          type: number
+                        isAvtive:
+                          type: number
+                        gpa:
+                          type: number
+                        gradeSimbole:
+                          type: string
+                        subjectStatus:
+                          type: string
+                        subjectStatusId:
+                          type: number
+                        oldCaption:
+                          type: object
+                        comment:
+                          type: object
+                        lecturerName:
+                          type: object
+                        improve:
+                          type: number
+                        thesesDefault:
+                          type: object
+                        thesesEng:
+                          type: object
+                        changeSubject:
+                          type: object
+                  student:
+                    type: object
+                    properties:
+                      studId:
+                        type: number
+                      fName:
+                        type: object
+                      sName:
+                        type: object
+                      fNameEn:
+                        type: object
+                      sNameEn:
+                        type: object
+                      persNumber:
+                        type: object
+                      passportNumber:
+                        type: object
+                      sex:
+                        type: object
+                      sexId:
+                        type: number
+                      fakulty:
+                        type: object
+                      studyLevel:
+                        type: object
+                      studyLevelId:
+                        type: number
+                      studyProgram:
+                        type: object
+                      programId:
+                        type: number
+                      programGroupId:
+                        type: number
+                      specialization:
+                        type: object
+                      specializationId:
+                        type: object
+                      facultyId:
+                        type: number
+                      studyYear:
+                        type: object
+                      studyYearId:
+                        type: number
+                      studySemester:
+                        type: object
+                      studySemesterId:
+                        type: number
+                      semesterPayment:
+                        type: object
+                      creditPayment:
+                        type: object
+                      complateYear:
+                        type: object
+                      naecReiting:
+                        type: object
+                      studentCode:
+                        type: object
+                      birthDay:
+                        type: object
+                      mobile:
+                        type: object
+                      email:
+                        type: object
+                      semester:
+                        type: number
+                      programCoreSemester:
+                        type: number
+                      studyStatus:
+                        type: object
+                      avgMark:
+                        type: number
+                      gpa:
+                        type: number
+                      gpaDanarti:
+                        type: number
+                      sumCredits:
+                        type: number
+                      personId:
+                        type: object
+                      fileId:
+                        type: object
+                      debt:
+                        type: object
+                      grant:
+                        type: object
+                      socialGrant:
+                        type: object
+                      ufasoGrant:
+                        type: object
+                      otherGrant:
+                        type: object
+                      adminRegPrecondition:
+                        type: number
+                      adminRegManualAllowed:
+                        type: number
+                      akadRegistrationPassed:
+                        type: number
+                      enterYear:
+                        type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: number
+            example:
+              1
+  /Sheared/GetClassRooms:
+    post:
+      summary: Gets all classrooms that exist
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    parentid:
+                      type: object
+                    typeId:
+                      type: number
+                    text:
+                      type: string
+                    typeCaption:
+                      type: string
+                    value:
+                      type: number
+                    icon:
+                      type: string
+                    seatPlace:
+                      type: number
+  /Sheared/GetStudyProgramList:
+    post:
+      summary: Gets the programs that are active to choose from
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    caption:
+                      type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                facultyId:
+                  type: number
+                studyLevelId:
+                  type: number
+                directionId:
+                  type: object
+                studyProgarmId:
+                  type: object
+  /Registration/GetSelectedCoursesTimeTable:
+    post:
+      summary: Gets the student's timetable
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                headers:
+                  type: object
+                  properties:
+                    normalizedNames:
+                      type: object
+                      properties: {}
+                    lazyUpdate:
+                      type: object
+  /Registration/GetActiveFaculties:
+    post:
+      summary: Gets info about when course registration starts or ends for each faculty
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  activeEduProcessData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        sessionId:
+                          type: number
+                        processId:
+                          type: number
+                        facultyId:
+                          type: number
+                        facultyCaption:
+                          type: string
+                        eduProcessTypeId:
+                          type: number
+                        studyLevelId:
+                          type: number
+                        studyLevelCaption:
+                          type: string
+                        startDateTimeTicks:
+                          type: number
+                        endDateTimeTicks:
+                          type: number
+                        startDateTime:
+                          type: string
+                        endDateTime:
+                          type: string
+                  serverDateTime:
+                    type: number
+  /Registration/GetStudentCurrentSessionSelectedCourses:
+    post:
+      summary: Gets info about the currently selected courses during the academic registration
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                headers:
+                  type: object
+                  properties:
+                    normalizedNames:
+                      type: object
+                      properties: {}
+                    lazyUpdate:
+                      type: object
+                    lazyInit:
+                      type: object
+                    headers:
+                      type: object
+                      properties: {}
+  /Registration/EnabledGreditForSubjectSelect:
+    post:
+      summary: Gets the maximum amount of credits you can get for the semester
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                headers:
+                  type: object
+                  properties:
+                    normalizedNames:
+                      type: object
+                      properties: {}
+                    lazyUpdate:
+                      type: object
+                    lazyInit:
+                      type: object
+                    headers:
+                      type: object
+                      properties: {}
+  /MobilityProcess/GetActiveProcess:
+    post:
+      summary: Not sure what this does
+      responses:
+        '200':
+          description: OK
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                headers:
+                  type: object
+                  properties:
+                    normalizedNames:
+                      type: object
+                      properties: {}
+                    lazyUpdate:
+                      type: object
+  /StudyPrograms/GetStudyProgramStrucutre:
+    post:
+      summary: Gets the mandatory and elective courses for the students major if `true` is given and minor if `false`
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        parentId:
+                          type: object
+                        caption:
+                          type: string
+                        printStructure:
+                          type: object
+                        status:
+                          type: string
+                        structType:
+                          type: string
+                        structTypeId:
+                          type: number
+                        minDoneCredits:
+                          type: number
+                        done:
+                          type: number
+                        doneCreditsByStudent:
+                          type: number
+                        creditVolume:
+                          type: number
+                        recomendedSemester:
+                          type: object
+                        studySemester:
+                          type: object
+                        statusId:
+                          type: number
+                        score:
+                          type: object
+                        evaluationSimbol:
+                          type: object
+                        orderNumber:
+                          type: object
+                        structureItemId:
+                          type: object
+                        syllabusId:
+                          type: object
+                        itemTypeLevel:
+                          type: number
+                        subjects:
+                          type: object
+                  done:
+                    type: number
+                  programName:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: boolean
+  /StudyPrograms/GetSubProgramList:
+    post:
+      summary: Not sure about this
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: number
+  /StudentFinance/GetStudentGrants:
+    post:
+      summary: Guessing this gives a list of grants (too bad I don't have any)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+  /StudentFinance/GetStudentPaymentSessions:
+    post:
+      summary: Gets the list of payment transactions for the tuition
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        otherPaymentConfigId:
+                          type: object
+                        studentId:
+                          type: number
+                        studyYear:
+                          type: string
+                        studySemester:
+                          type: string
+                        studyYearId:
+                          type: number
+                        studySemesterId:
+                          type: number
+                        paymentTypeID:
+                          type: number
+                        paymentType:
+                          type: string
+                        paymentStatus:
+                          type: string
+                        paymentStatusId:
+                          type: number
+                        payment:
+                          type: number
+                        credit:
+                          type: object
+                        creditPayment:
+                          type: object
+                        discount:
+                          type: object
+                        currencyCaption:
+                          type: string
+                        currencyId:
+                          type: number
+                        sumPay:
+                          type: number
+                        finGranSum:
+                          type: number
+                        finGranPaydSym:
+                          type: number
+                        leftPayment:
+                          type: number
+                        paymentPercentage:
+                          type: object
+                        paymentLeftFromPriew:
+                          type: number
+                        usedCredits:
+                          type: object
+                  debt:
+                    type: number
+                  grantDebt:
+                    type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                FilterSubjectSylabusCourseEduPrograms:
+                  type: object
+                  properties: {}
+  /StudentFinance/GetStudentPaysOnSemesterPayment:
+    post:
+      summary: Not sure what this is
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: number
+  /StudentFinance/GetStudentDebtDistributions:
+    post:
+      summary: Gets the debt you have with the university (too bad I don't have any)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  studentFinDebtDistributionList:
+                    type: array
+                    items: {}
+                  leftPaydMony:
+                    type: number
+                  sumFine:
+                    type: number
+                  studentFinDistributionDocument:
+                    type: object
+                    properties:
+                      id:
+                        type: object
+                      paymentId:
+                        type: number
+                      statementNumber:
+                        type: object
+                      statementDescription:
+                        type: object
+                      statementDate:
+                        type: object
+                      mobileNumber:
+                        type: object
+                      fileStreamId:
+                        type: object
+                      smsSended:
+                        type: object
+                      agreement:
+                        type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: number
+  /StudentFinance/GetStudPaySessionGrantList:
+    post:
+      summary: still don't have grants to know what this looks like
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: number
+  /Notice/GetNoticeCategories:
+    post:
+      summary: Not sure, just returns an empty array
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isActive:
+                  type: number
+  /Correspondence/GetInCominOutGoingCategories:
+    post:
+      summary: Gets the categories for the correspondences
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  categoryGroupIncomin:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: number
+                        correspondeceTypeId:
+                          type: number
+                        caption:
+                          type: string
+                  categoryGroupOutGoing:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: number
+                        correspondeceTypeId:
+                          type: number
+                        caption:
+                          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                correspondenceDirection:
+                  type: number
+                correspondenceStatusId:
+                  type: object
+                programId:
+                  type: object
+                subProgramId:
+                  type: object
+                courseId:
+                  type: object
+                directionId:
+                  type: object
+                importent:
+                  type: object
+                studyLevelId:
+                  type: object
+                studentStatusId:
+                  type: object
+                personStatus:
+                  type: number
+                read:
+                  type: object
+                pn:
+                  type: object
+                faculty:
+                  type: object
+                courseName:
+                  type: object
+                fName:
+                  type: object
+                sName:
+                  type: object
+                index:
+                  type: number
+                take:
+                  type: number
+  /Correspondence/GetIncomingOutgonigCorrespondence:
+    post:
+      summary: Gets correspondences
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statementData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        personId:
+                          type: number
+                        sName:
+                          type: string
+                        fName:
+                          type: string
+                        pn:
+                          type: string
+                        phoneNumber:
+                          type: object
+                        eMail:
+                          type: object
+                        facultyCaption:
+                          type: string
+                        studyLevelCaption:
+                          type: string
+                        directionCaption:
+                          type: object
+                        specialization:
+                          type: object
+                        staffStatus:
+                          type: string
+                        studentEducationStatus:
+                          type: string
+                        semesterNumber:
+                          type: object
+                        staffPosition:
+                          type: string
+                        coresspondenceDataId:
+                          type: number
+                        coresspondenceId:
+                          type: number
+                        stateId:
+                          type: number
+                        stateCaption:
+                          type: string
+                        importentStatusId:
+                          type: number
+                        importentStatusCaption:
+                          type: string
+                        fromPersonId:
+                          type: number
+                        correspondeceTypeId:
+                          type: number
+                        correspondeceTypeCaption:
+                          type: string
+                        correspondenceSubject:
+                          type: string
+                        correspondenceDescription:
+                          type: string
+                        createDate:
+                          type: string
+                        asPersonalId:
+                          type: number
+                        asStudentId:
+                          type: object
+                        fromCourseId:
+                          type: object
+                        syllabusCaption:
+                          type: string
+                        lecturers:
+                          type: string
+                        readStatus:
+                          type: number
+                        facultyName:
+                          type: string
+                        haveDocument:
+                          type: number
+                  count:
+                    type: number
+                  categoryGroup:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        count:
+                          type: number
+                        correspondeceTypeId:
+                          type: number
+                        caption:
+                          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                correspondenceDirection:
+                  type: number
+                correspondenceStatusId:
+                  type: object
+                programId:
+                  type: object
+                subProgramId:
+                  type: object
+                correspondenceTypeId:
+                  type: object
+                courseId:
+                  type: object
+                courseName:
+                  type: object
+                directionId:
+                  type: object
+                importent:
+                  type: object
+                studyLevelId:
+                  type: object
+                studentStatusId:
+                  type: object
+                personStatus:
+                  type: number
+                read:
+                  type: object
+                pn:
+                  type: object
+                faculty:
+                  type: object
+                fName:
+                  type: object
+                sName:
+                  type: object
+                index:
+                  type: number
+                take:
+                  type: number
+  /Correspondence/GetCorrespondeceImportantStatus:
+    post:
+      summary: Gets the correspondence importance status names and IDs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    caption:
+                      type: string
+  /Correspondence/GetCorState:
+    post:
+      summary: Gets the correspondence status names and IDs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    caption:
+                      type: string
+  /Correspondence/GetCorrespondence:
+    post:
+      summary: Gets the specific correspondence text and other info
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  correspondenceData:
+                    type: object
+                    properties:
+                      personId:
+                        type: number
+                      sName:
+                        type: string
+                      fName:
+                        type: string
+                      pn:
+                        type: string
+                      phoneNumber:
+                        type: object
+                      eMail:
+                        type: object
+                      facultyCaption:
+                        type: string
+                      studyLevelCaption:
+                        type: string
+                      directionCaption:
+                        type: object
+                      specialization:
+                        type: object
+                      staffStatus:
+                        type: string
+                      studentEducationStatus:
+                        type: string
+                      semesterNumber:
+                        type: object
+                      staffPosition:
+                        type: string
+                      coresspondenceDataId:
+                        type: number
+                      coresspondenceId:
+                        type: number
+                      stateId:
+                        type: number
+                      stateCaption:
+                        type: string
+                      importentStatusId:
+                        type: number
+                      importentStatusCaption:
+                        type: string
+                      fromPersonId:
+                        type: number
+                      correspondeceTypeId:
+                        type: number
+                      correspondeceTypeCaption:
+                        type: string
+                      correspondenceSubject:
+                        type: string
+                      correspondenceDescription:
+                        type: string
+                      createDate:
+                        type: string
+                      asPersonalId:
+                        type: number
+                      asStudentId:
+                        type: object
+                      fromCourseId:
+                        type: object
+                      syllabusCaption:
+                        type: string
+                      lecturers:
+                        type: object
+                      readStatus:
+                        type: number
+                      facultyName:
+                        type: object
+                      haveDocument:
+                        type: number
+                  correspondencAttachments:
+                    type: array
+                    items: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: number
+  /Profile/StudentAnkData:
+    post:
+      summary: Gets the student profile form
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  person:
+                    type: object
+                    properties:
+                      personId:
+                        type: number
+                      profileImageId:
+                        type: string
+                      personNumber:
+                        type: string
+                      passportNumber:
+                        type: object
+                      birthDay:
+                        type: string
+                      aspNetUserId:
+                        type: string
+                      sexId:
+                        type: number
+                      sex:
+                        type: string
+                      languageId:
+                        type: number
+                      languageCaption:
+                        type: string
+                      email:
+                        type: string
+                      phone:
+                        type: string
+                      schoolEmail:
+                        type: string
+                      personEditionData:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          certificateNumber:
+                            type: object
+                          passportAddress:
+                            type: string
+                          realAddress:
+                            type: string
+                          citizenshipId:
+                            type: number
+                          citizenship2Id:
+                            type: object
+                          nationalityId:
+                            type: object
+                          maritalStatusId:
+                            type: object
+                          militaryStatusId:
+                            type: object
+                          militaryAddress:
+                            type: object
+                          socialStatusId:
+                            type: object
+                          specialEducationNeedId:
+                            type: object
+                          citizenshipTitle:
+                            type: string
+                          citizenship2Title:
+                            type: object
+                          nationalityTitle:
+                            type: object
+                          maritalStatusTitle:
+                            type: object
+                          militaryStatusTitle:
+                            type: object
+                          socialStatusTitle:
+                            type: object
+                          specialEducationNeedTitle:
+                            type: object
+                      defaultFirstName:
+                        type: string
+                      defaultLastName:
+                        type: string
+                      firstNameEn:
+                        type: string
+                      lastNameEn:
+                        type: string
+                      firstNameRu:
+                        type: object
+                      lastNameRu:
+                        type: object
+                  student:
+                    type: object
+                    properties:
+                      studId:
+                        type: number
+                      personId:
+                        type: number
+                      primaryStudyProgramID:
+                        type: number
+                      primarySpecializationID:
+                        type: object
+                      secondaryStudyProgramID:
+                        type: number
+                      primaryStudyProgramName:
+                        type: string
+                      primarySpecializationName:
+                        type: object
+                      secondaryStudyProgramName:
+                        type: string
+                      fakulty:
+                        type: string
+                      facultyId:
+                        type: number
+                      studyLevel:
+                        type: string
+                      studyLevelId:
+                        type: number
+                      studGroupId:
+                        type: object
+                      studGroup:
+                        type: string
+                      naecReiting:
+                        type: number
+                      studentCode:
+                        type: string
+                      semester:
+                        type: number
+                      studyYear:
+                        type: string
+                      studySemester:
+                        type: string
+                      studyYearId:
+                        type: number
+                      studySemesterId:
+                        type: number
+                      semesterPayment:
+                        type: object
+                      creditPayment:
+                        type: object
+                      studyStatus:
+                        type: string
+                      studyStatusID:
+                        type: number
+                      aVGMark:
+                        type: object
+                      gpa:
+                        type: object
+                      sumCredits:
+                        type: object
+                  personOrders:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        orderDataId:
+                          type: number
+                        parentCategoryId:
+                          type: number
+                        orderComment:
+                          type: string
+                        orderDescription:
+                          type: object
+                        orderCategoryName:
+                          type: string
+                        orderBase:
+                          type: object
+                        orderDate:
+                          type: string
+                        orderNumber:
+                          type: string
+                        fileList:
+                          type: object
+                  orderStudentsThesisDatas:
+                    type: array
+                    items: {}
+                  files:
+                    type: array
+                    items: {}
+                  studentAccessOnAcadRegistration:
+                    type: number
+                  studentAccessSetByAdminUserForAcadRegistration:
+                    type: number
+                  enablePayment:
+                    type: object
+                  currencyId:
+                    type: number
+                  semesterPayment:
+                    type: number
+  /Sheared/GetSex:
+    post:
+      summary: Gets the sexes' names and IDs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    caption:
+                      type: string
+  /TableStructureBuilder/TableStructureTypesByCategories:
+    post:
+      summary: Not sure exactly what this is
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    caption:
+                      type: string
+                    forLecturer:
+                      type: number
+                    forStudent:
+                      type: number
+                    forPersonal:
+                      type: object
+                    forProgram:
+                      type: object
+                    forSyllabus:
+                      type: object
+                    tableStructureList:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          tableStructureName:
+                            type: string
+                          tableStructureDescription:
+                            type: object
+                          categoryName:
+                            type: string
+                          categoryId:
+                            type: number
+                          vertical:
+                            type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: number
+  /Sheared/GetLanguage:
+    post:
+      summary: Gets the languages' names and IDs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    caption:
+                      type: string
+  /Sheared/GetFileFor:
+    post:
+      summary: Gives a list of the names and IDs of student specific files that can be gotten
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    caption:
+                      type: string
+  /Sheared/GetStudyLevelList:
+    post:
+      summary: Gets a list of some things about academic levels, such as exchange or bachelors.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    caption:
+                      type: string
+                    qvalification:
+                      type: string
+                    enrollFromPreparation:
+                      type: number
+  /Sheared/GetMilitaryStatus:
+    post:
+      summary: Gets the names and IDs of military statuses
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    caption:
+                      type: string
+  /Registration/EnabledRegistrationStatus:
+    post:
+      summary: Gets what registration stages are active or not
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    process:
+                      type: number
+                    status:
+                      type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                headers:
+                  type: object
+                  properties:
+                    normalizedNames:
+                      type: object
+                      properties: {}
+                    lazyUpdate:
+                      type: object
+                    lazyInit:
+                      type: object
+                    headers:
+                      type: object
+                      properties: {}
+  /Registration/GetStudyCourseListForStudentByCurrentSession:
+    post:
+      summary: Gets the list of courses for a specific program. the `studyProgram` field can sometimes be a string, for some reason
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+                  result:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        syllabusId:
+                          type: number
+                        courseId:
+                          type: number
+                        syllabusCaption:
+                          type: string
+                        subjectTypeCaption:
+                          type: string
+                        subjectTypeID:
+                          type: number
+                        subjectId:
+                          type: number
+                        subjectStatus:
+                          type: string
+                        credit:
+                          type: number
+                        enrollEnableOnSyllabus:
+                          type: number
+                        enrollEnabledOnCourse:
+                          type: number
+                        preconditionComment:
+                          type: object
+                        subGroupSelection:
+                          type: number
+                        documentId:
+                          type: string
+                        syllabusList:
+                          type: array
+                          items: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                faculty:
+                  type: number
+                searchCourse:
+                  type: string
+                studyProgram:
+                  type: number
+                studentId:
+                  type: object
+                index:
+                  type: number
+                take:
+                  type: number
+  /Registration/GetPreconditionDoneView:
+    post:
+      summary: Gets the preconditions that you don't satisfy for a course (also gets the ones you do, but you can't get this if you do satisfy all of them)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  preconditionStructure:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        preconGroupName:
+                          type: string
+                        preconditionStructureTypeName:
+                          type: string
+                        subPreconditions:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              subjectCaption:
+                                type: string
+                              sylabusCaption:
+                                type: string
+                              programName:
+                                type: string
+                              directionName:
+                                type: string
+                              fakultyName:
+                                type: string
+                              preconditionTypeName:
+                                type: string
+                              progModuleName:
+                                type: string
+                              id:
+                                type: number
+                              preconStructureId:
+                                type: number
+                              subjectId:
+                                type: object
+                              sylabusId:
+                                type: object
+                              semester:
+                                type: object
+                              programId:
+                                type: object
+                              directionId:
+                                type: number
+                              fakultyId:
+                                type: object
+                              preconditionTypeId:
+                                type: number
+                              progModuleId:
+                                type: object
+                              minScore:
+                                type: number
+                              maxScore:
+                                type: number
+                              doneByStudent:
+                                type: number
+                        id:
+                          type: number
+                        parentId:
+                          type: object
+                        preconditionStructureTypeId:
+                          type: number
+                        doneByStudent:
+                          type: number
+                        checkOtherChilds:
+                          type: number
+                  isValid:
+                    type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                preconditionFor:
+                  type: number
+  /Registration/GetSelectedCourseLectureWithAllData:
+    post:
+      summary: Gets a specific courses choosable times, lectors and other info
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  courseSelectData:
+                    type: object
+                  lecturesForSelect:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        lectureNum:
+                          type: string
+                        subSelection:
+                          type: number
+                        lectureTypeID:
+                          type: number
+                        selected:
+                          type: number
+                        disabled:
+                          type: number
+                        isValid:
+                          type: number
+                        lectureQuotes:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              lectureId:
+                                type: number
+                              facultyName:
+                                type: string
+                              facultyId:
+                                type: number
+                              studyLevelName:
+                                type: string
+                              studyLevelId:
+                                type: number
+                              maxQuantities:
+                                type: number
+                              minQuantities:
+                                type: number
+                              studQuantity:
+                                type: number
+                              otherFaculties:
+                                type: number
+                              programName:
+                                type: string
+                              programId:
+                                type: object
+                        timeTableOnLectures:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              lectureId:
+                                type: number
+                              classRoomsId:
+                                type: number
+                              sName:
+                                type: string
+                              fName:
+                                type: string
+                              dayName:
+                                type: string
+                              startTime:
+                                type: string
+                              endTime:
+                                type: string
+                              date:
+                                type: object
+                              weekDayId:
+                                type: number
+                              equalsToAtherSelectedCourse:
+                                type: object
+                              ifEqualsComment:
+                                type: object
+                  lectureTypes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        caption:
+                          type: string
+                  audList:
+                    type: object
+                  studTimeTable:
+                    type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                courseId:
+                  type: number
+                studId:
+                  type: number
+                typeId:
+                  type: number
+  /Registration/SaveStudentSelectedCourse:
+    post:
+      summary: Registers the student to a specific course
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resultId:
+                    type: number
+                  resultText:
+                    type: string
+                  seccuss:
+                    type: number
+                  data:
+                    type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                syllabusId:
+                  type: number
+                studentId:
+                  type: object
+                operation:
+                  type: number
+                groups:
+                  type: array
+                  items:
+                    type: number
+                facultyId:
+                  type: number
+                studyLevelId:
+                  type: number
+                selectedCourseForDeleteEnrollId:
+                  type: object
+                programId:
+                  type: number
+  /Registration/DeleteStudentSelectedCourse:
+    post:
+      summary: Deletes a specific course
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resultId:
+                    type: number
+                  resultText:
+                    type: string
+                  seccuss:
+                    type: number
+                  data:
+                    type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: number
